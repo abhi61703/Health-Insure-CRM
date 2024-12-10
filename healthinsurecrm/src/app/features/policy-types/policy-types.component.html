@@ -1,0 +1,18 @@
+<p-panel header="Policy Types">
+  <div class="policy-container">
+    <div class="policy-box" *ngFor="let policy of policyOptions" (mouseenter)="flipCard(policy)" (mouseleave)="unflipCard(policy)">
+      <p-card class="policy-card" [style.width]="'200px'" [style.height]="'250px'">
+        <ng-template pTemplate="header">
+          <div class="policy-card-header">
+            <h4>{{ policy.label }}</h4>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="policy-card-content">
+            <p *ngIf="policy.isFlipped">Details about {{ policy.label }}</p>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</p-panel>

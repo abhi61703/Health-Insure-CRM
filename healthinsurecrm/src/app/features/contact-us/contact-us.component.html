@@ -1,0 +1,29 @@
+<p-panel header="Contact Us" class="contact-us-container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" pInputText formControlName="name" />
+      <small *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="p-error">
+        Name is required and should be at least 3 characters long.
+      </small>
+    </div>
+
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText formControlName="email" />
+      <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="p-error">
+        Please enter a valid email address.
+      </small>
+    </div>
+
+    <div class="p-field">
+      <label for="query">Your Query</label>
+      <textarea id="query" rows="5" pInputTextarea formControlName="message"></textarea>
+      <small *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="p-error">
+        Message is required and should be at least 10 characters long.
+      </small>
+    </div>
+
+    <button pButton label="Submit" class="p-button-rounded p-button-success" [disabled]="contactForm.invalid"></button>
+  </form>
+</p-panel>

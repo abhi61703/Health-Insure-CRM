@@ -1,0 +1,75 @@
+.policy-container {
+  display: flex;
+  justify-content: space-around;  /* Horizontally aligns the boxes */
+  gap: 20px;  /* Space between boxes */
+}
+
+.policy-box {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  perspective: 1000px;
+}
+
+.policy-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.policy-box:hover .policy-card {
+  transform: rotateY(180deg);
+}
+
+.policy-card-header {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+.policy-card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #eeeeee;
+  color: #333;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg);  /* Rotate the back content */
+  backface-visibility: hidden;  /* Hide the back content when flipped */
+}
+
+.policy-card-content p {
+  font-size: 1rem;
+  text-align: center;
+  backface-visibility: hidden;  /* Prevents the text from being mirrored */
+}
+
+/* Front content */
+.policy-card-header {
+  backface-visibility: hidden;
+}
+
+.policy-box:hover .policy-card .policy-card-content {
+  transform: rotateY(0deg);  /* Make sure the back flips back properly */
+}
+
+/* For responsiveness: when screen size is smaller */
+@media (max-width: 768px) {
+  .policy-container {
+    flex-direction: row;  /* Keeps the cards in a row on small screens */
+    flex-wrap: wrap;  /* Allows wrapping to new rows if necessary */
+    justify-content: center;  /* Centers the boxes */
+  }
+
+  .policy-box {
+    margin-bottom: 20px;  /* Adds some space at the bottom for wrapping */
+  }
+}
