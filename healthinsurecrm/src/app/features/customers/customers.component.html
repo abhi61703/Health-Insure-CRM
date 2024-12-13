@@ -13,7 +13,7 @@
   #table
   [value]="customers"
   [paginator]="true"
-  [rows]="10"
+  [rows]="5"
   [resizableColumns]="true"
   [globalFilterFields]="['name', 'email', 'policyType']"
   [sortMode]="'multiple'"
@@ -61,7 +61,7 @@
           pButton
           icon="pi pi-pencil"
           class="p-button-text"
-          (click)="editCustomer(customer)"
+          (click)="editCustomer(customer, customer.customerID)"
         ></button>
         <button
           pButton

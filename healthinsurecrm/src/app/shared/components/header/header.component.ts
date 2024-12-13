@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Input({required: true}) menuItems: any[] = []; // Accept menu items from AppComponent
+  @Input({required: true}) menuItems: any[] = []; 
   
 }

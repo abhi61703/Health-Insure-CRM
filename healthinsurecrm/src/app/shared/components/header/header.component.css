@@ -1,24 +1,25 @@
-/* Navbar container */
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
-  background-color: #012541; /* Example background color */
+  background-color: #012541;
 }
 
-/* Logo container */
+
 .logo-container {
-  flex: 1; /* Takes up remaining space */
+  flex: 1; 
 }
 
-/* Styling the logo image */
+
 .logo {
-  width: 200px;  /* Adjust the logo size */
+  width: 200px;  
   height: auto;
+  transition: transform 0.3s ease, cursor 0.3s; 
 }
 
-/* Navigation links */
+
 .nav-links {
   display: flex;
   list-style-type: none;
@@ -35,12 +36,18 @@
   font-size: 16px;
   display: flex;
   align-items: center;
+  transition: transform 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #ffd700; /* Example hover effect */
+  color: #ffd700; 
+  transform: scale(1.1); 
 }
-
 .nav-links i {
   margin-right: 8px;
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Enlarges the logo slightly on hover */
+  cursor: pointer; /* Changes the mouse pointer to indicate interactivity */
 }

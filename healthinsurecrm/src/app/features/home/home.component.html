@@ -1,5 +1,5 @@
 <div class="p-grid p-dir-col p-align-center p-mt-4">
-  <!-- Welcome Section -->
+  
   <p-card class="p-mb-4 p-shadow-4 welcome-card">
     <ng-template pTemplate="title">
       Welcome to IBC Health Insurance CRM
@@ -8,27 +8,28 @@
       Your one-stop solution for managing customers and policies with excellence.
     </ng-template>
     <ng-template pTemplate="content">
-      <div class="p-text-center p-mb-4">
-        <p-button label="Explore Policies" icon="pi pi-search" class="p-button-rounded p-button-info" [routerLink]="['/policy-types']"></p-button>
+      <div class="button-column">
+        <p-button 
+          label="Explore Policies" 
+          icon="pi pi-search" 
+          class="p-button-rounded p-button-info explore-button" 
+          [routerLink]="['/policy-types']">
+        </p-button>
+        <p-button 
+          label="Explore Customers" 
+          icon="pi pi-search" 
+          class="p-button-rounded p-button-info explore-button" 
+          [routerLink]="['/customers']">
+        </p-button>
       </div>
     </ng-template>
   </p-card>
 
-  <!-- Company Details Section -->
+  
   <p-panel header="About Us" class="p-shadow-3 p-mb-4">
-
-    <div class="p-grid p-align-center p-justify-center">
-      <!-- Image Box -->
-      <div class="p-col-12 p-md-5 p-shadow-3 p-p-3" style="background-color: #f9f9f9; border-radius: 8px; text-align: center;">
-        <img
-          src="assets/images/IBC.png"
-          alt="IBC Headquarters"
-          class="p-shadow-3"
-          style="width: 100%; max-width: 200px; border-radius: 8px;"
-        />
-      </div>
-      <!-- Text Box -->
-      <div class="p-col-12 p-md-6 p-shadow-3 p-mr-2 p-p-3" style="background-color: #f9f9f9; border-radius: 8px;">
+    <div class="p-grid p-align-center p-col-12 about-us-row">
+      
+      <div class="p-col-12 p-md-7 about-text">
         <p>
           <strong>{{ companyDetails.name }}</strong> <br />
           {{ companyDetails.history }}
@@ -41,14 +42,19 @@
           <li>{{ companyDetails.compensation }}</li>
         </ul>
       </div>
+
       
+      <div class="p-col-12 p-md-5 about-image">
+        <img
+          src="assets/images/IBC.png"
+          alt="IBC Headquarters"
+        />
+      </div>
     </div>
   </p-panel>
-  
-  
 
-  <!-- News Section -->
-  <p-card class="p-shadow-4 p-mb-4">
+  
+  <p-card class="p-shadow-4 p-mb-4" >
     <ng-template pTemplate="header">
       <div class="p-d-flex p-ai-center">
         <i class="pi pi-bell p-mr-2"></i>
@@ -56,27 +62,11 @@
       </div>
     </ng-template>
     <ng-template pTemplate="content">
-      <p-chips [ngModel]="newsItems" readonly="true"></p-chips>
+      <div class="news-container">
+        <div *ngFor="let news of newsItems" class="news-card">
+          <p>{{ news }}</p>
+        </div>
+      </div>
     </ng-template>
   </p-card>
-  
-
 </div>
-
-  <!-- Chart Section -->
-  <!-- <div class="p-grid p-justify-center">
-    <div class="p-col-12 p-md-6">
-      <p-card class="p-shadow-4">
-        <ng-template pTemplate="header">
-          <div class="p-d-flex p-ai-center">
-            <i class="pi pi-chart-pie p-mr-2"></i>
-            Customer and Policy Stats
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <p-chart type="pie" [data]="chartData" [options]="chartOptions"></p-chart>
-        </ng-template>
-      </p-card>
-    </div>
-  </div> -->
-

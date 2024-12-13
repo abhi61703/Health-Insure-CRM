@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../../core/services/customer.service';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { Table } from 'primeng/table';
+import { Customer } from '../../shared/models/customer.model';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css'],
-  providers: [MessageService], // For displaying toast messages
+  providers: [MessageService], 
 })
 export class CustomersComponent implements OnInit {
-  customers: any[] = []; // Holds the customer list
-  displayDialog = false; // Controls the visibility of the dialog
-  selectedCustomer: any = {}; // Stores data of the customer being edited or added
-  isEdit = false; // Indicates if the dialog is for editing or adding
-  exportUrl = 'http://localhost:8080/api/customers/export'; // URL to export PDF or Excel
-  table: any;
+  customers: Customer[] = []; 
+  displayDialog = false; 
+  selectedCustomer: Customer | any = {}; 
+  isEdit = false;
+  exportUrl = 'http://localhost:8080/api/customers/export';
+  @ViewChild('table') table: Table | undefined;
+  
   constructor(
     private customerService: CustomerService,
     private messageService: MessageService,
@@ -45,7 +48,7 @@ export class CustomersComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  editCustomer(customer: any): void {
+  editCustomer(customer: Customer, customerId: number): void {
     this.selectedCustomer = { ...customer };
     this.isEdit = true;
     this.displayDialog = true;
@@ -53,7 +56,7 @@ export class CustomersComponent implements OnInit {
 
   saveCustomer(): void {
     if (this.isEdit) {
-      this.customerService.updateCustomer(this.selectedCustomer.id, this.selectedCustomer).subscribe({
+      this.customerService.updateCustomer(this.selectedCustomer.customerId, this.selectedCustomer).subscribe({
         next: () => {
           this.loadCustomers();
           this.closeDialog();
@@ -121,7 +124,7 @@ export class CustomersComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail });
   }
 
-  // Export to Excel
+  
   exportToExcel(): void {
     this.http.get(`${this.exportUrl}/excel`, { responseType: 'blob' }).subscribe((response: Blob) => {
       const fileName = 'customers.xlsx';
@@ -133,7 +136,6 @@ export class CustomersComponent implements OnInit {
     });
   }
 
-  // Export to PDF
   exportToPdf(): void {
     this.http.get(`${this.exportUrl}/pdf`, { responseType: 'blob' }).subscribe((response: Blob) => {
       const fileName = 'customers.pdf';
@@ -144,10 +146,11 @@ export class CustomersComponent implements OnInit {
       link.click();
     });
   }
+
   filterCustomers(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;  // Safely cast the event target
-    if (inputElement) {
-      this.table?.filterGlobal(inputElement.value, 'contains'); // Use the value from the input element
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement && this.table) {
+      this.table.filterGlobal(inputElement.value, 'contains');
     }
   }
 }

@@ -1,16 +1,33 @@
-<p-panel header="Policy Types">
-  <div class="policy-container">
-    <div class="policy-box" *ngFor="let policy of policyOptions" (mouseenter)="flipCard(policy)" (mouseleave)="unflipCard(policy)">
-      <p-card class="policy-card" [style.width]="'200px'" [style.height]="'250px'">
+<p-panel header="Policy Types" styleClass="policy-panel">
+  <div class="p-grid policy-container">
+    <div
+      class="p-col-12 p-md-4"
+      *ngFor="let policy of policyOptions"
+    >
+      <p-card
+        header="{{ policy.label }}"
+        [style]="{ width: '100%', height: '100%' }"
+        [class.hovered]="policy.isHovered"
+        (mouseenter)="hoverPolicy(policy)"
+        (mouseleave)="resetPolicy(policy)"
+        styleClass="policy-card"
+      >
         <ng-template pTemplate="header">
-          <div class="policy-card-header">
-            <h4>{{ policy.label }}</h4>
+          <div class="icon-container">
+            <i [class]="policy.icon" class="policy-icon"></i>
           </div>
         </ng-template>
         <ng-template pTemplate="content">
-          <div class="policy-card-content">
-            <p *ngIf="policy.isFlipped">Details about {{ policy.label }}</p>
-          </div>
+          <p>{{ policy.details }}</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            label="Explore"
+            icon="pi pi-external-link"
+            class="p-button-primary"
+            (click)="explorePolicy(policy)"
+          ></button>
         </ng-template>
       </p-card>
     </div>

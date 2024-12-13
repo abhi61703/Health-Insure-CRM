@@ -7,18 +7,35 @@ import { Component } from '@angular/core';
 })
 export class PolicyTypesComponent {
   policyOptions = [
-    { label: 'Health Insurance', value: 'health', isFlipped: false },
-    { label: 'Life Insurance', value: 'life', isFlipped: false },
-    { label: 'Travel Insurance', value: 'travel', isFlipped: false }
+    {
+      label: 'Individual',
+      details: 'Covers an individual under this policy.',
+      icon: 'pi pi-user',
+      isHovered: false
+    },
+    {
+      label: 'Family',
+      details: 'Covers all family members under this policy.',
+      icon: 'pi pi-users',
+      isHovered: false
+    },
+    {
+      label: 'Senior Citizen',
+      details: 'Designed for senior citizens with tailored benefits.',
+      icon: 'pi pi-star',
+      isHovered: false
+    }
   ];
 
-  selectedPolicy: any;
-
-  flipCard(policy: any) {
-    policy.isFlipped = true;
+  hoverPolicy(policy: any) {
+    policy.isHovered = true;
   }
 
-  unflipCard(policy: any) {
-    policy.isFlipped = false;
+  resetPolicy(policy: any) {
+    policy.isHovered = false;
+  }
+
+  explorePolicy(policy: any): void {
+    alert(`Exploring ${policy.label}!`);
   }
 }
